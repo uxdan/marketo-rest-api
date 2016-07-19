@@ -199,6 +199,23 @@
             },
             "responseClass": "CSD\\Marketo\\Response\\GetPagingToken"
         },
+        "getActivityTypes": {
+            "httpMethod": "GET",
+            "uri": "activities/types.json",
+            "responseClass": "CSD\\Marketo\\Response\\GetActivityTypesResponse"
+        },
+        "getLeadActivities": {
+            "httpMethod": "GET",
+            "uri": "activities.json",
+            "parameters": {
+                "activityTypeIds": {"location": "query"},
+                "nextPageToken": {"location": "query"},
+                "batchSize": {"location": "query"},
+                "listId": {"location": "query"},
+                "leadIds": {"location": "query"}
+            },
+            "responseClass": "CSD\\Marketo\\Response\\GetLeadActivitiesResponse"
+        },
         "getLeadChanges": {
             "httpMethod": "GET",
             "uri": "activities/leadchanges.json",

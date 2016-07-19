@@ -22,8 +22,10 @@ use Guzzle\Service\Description\ServiceDescription;
 use CSD\Marketo\Response\AddOrRemoveLeadsToListResponse;
 use CSD\Marketo\Response\AssociateLeadResponse;
 use CSD\Marketo\Response\CreateOrUpdateLeadsResponse;
+use CSD\Marketo\Response\GetActivityTypesResponse;
 use CSD\Marketo\Response\GetCampaignResponse;
 use CSD\Marketo\Response\GetCampaignsResponse;
+use CSD\Marketo\Response\GetLeadActivitiesResponse;
 use CSD\Marketo\Response\GetLeadResponse;
 use CSD\Marketo\Response\GetLeadPartitionsResponse;
 use CSD\Marketo\Response\GetLeadsResponse;
@@ -602,6 +604,44 @@ class Client extends GuzzleClient
         $args['sinceDatetime'] = $sinceDatetime;
 
         return $this->getResult('getPagingToken', $args, false, $returnRaw);
+    }
+
+    /**
+     * Get lead activites
+     *
+     * @param string|array $activityTypeIds Activity type ids
+     * @param string       $nextPageToken Next page token
+     * @param array        $args
+     * @param bool         $returnRaw
+     *
+     * @return GetLeadActivites
+     * @link http://developers.marketo.com/documentation/rest/get-lead-activities/
+     * @see  getPagingToken
+     *
+     */
+    public function getLeadActivities($activityTypeIds, $nextPageToken, $args = array(), $returnRaw = false)
+    {
+        $args['activityTypeIds'] = (array) $activityTypeIds;
+
+        if (count($activityTypeIds)) {
+            $args['activityTypeIds'] = implode(',', $activityTypeIds);
+        }
+
+        $args['nextPageToken'] = $nextPageToken;
+
+        return $this->getResult('getLeadActivities', $args, false, $returnRaw);
+    }
+
+    /**
+     * Get activity types.
+     *
+     * @link http://developers.marketo.com/documentation/rest/get-activity-types/
+     *
+     * @return GetActivityTypesResponse
+     */
+    public function getActivityTypes($args = array(), $returnRaw = false)
+    {
+        return $this->getResult('getActivityTypes', $args, false, $returnRaw);
     }
 
     /**
